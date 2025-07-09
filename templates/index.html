@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AgriTrack Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>AgriTrack – Farm Dashboard</h1>
+    <nav>
+      <a href="/">Dashboard</a> |
+      <a href="/expenses">Expenses</a> |
+      <a href="/tasks">Tasks</a> |
+      <a href="/sales">Sales</a> |
+      <a href="/login">Log In</a> 
+
+    </nav>
+  </header>
+
+  <section class="summary">
+    <h2>Financial Overview</h2>
+    <p><strong>Total Expenses:</strong> KES {{ expenses }}</p>
+    <p><strong>Total Sales:</strong> KES {{ sales }}</p>
+    <p><strong>Net Profit:</strong> KES {{ sales - expenses }}</p>
+  </section>
+
+  <section class="tasks">
+    <h2>Upcoming Tasks</h2>
+    {% if tasks %}
+      <ul>
+        {% for task, date in tasks %}
+          <li>{{ date }} – {{ task }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No upcoming tasks scheduled.</p>
+    {% endif %}
+  </section>
+
+  <footer>
+    <p>&copy; {{ now.year }} AgriTrack</p>
+  </footer>
+</body>
+</html>

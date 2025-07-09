@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sales – AgriTrack</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Farm Output Sales</h1>
+    <nav>
+      <a href="/">Dashboard</a> |
+      <a href="/expenses">Expenses</a> |
+      <a href="/tasks">Tasks</a> |
+      <a href="/sales">Sales</a>
+    </nav>
+  </header>
+
+  <section class="form-section">
+    <h2>Record a New Sale</h2>
+    <form method="POST">
+      <label>Item Sold:</label>
+      <input type="text" name="item" placeholder="e.g. Tomatoes" required><br><br>
+
+      <label>Quantity (kg or count):</label>
+      <input type="number" step="0.01" name="quantity" required><br><br>
+
+      <label>Price per Unit (KES):</label>
+      <input type="number" step="0.01" name="price" required><br><br>
+
+      <label>Buyer Name:</label>
+      <input type="text" name="buyer"><br><br>
+
+      <label>Date:</label>
+      <input type="date" name="date" required><br><br>
+
+      <button type="submit">Add Sale</button>
+    </form>
+  </section>
+
+  <section class="table-section">
+    <h2>Sales History</h2>
+    {% if sales %}
+      <table border="1" cellpadding="8">
+        <tr>
+          <th>Date</th>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Price (KES)</th>
+          <th>Total (KES)</th>
+          <th>Buyer</th>
+        </tr>
+        {% for sale in sales %}
+        <tr>
+          <td>{{ sale[5] }}</td>
+          <td>{{ sale[1] }}</td>
+          <td>{{ sale[2] }}</td>
+          <td>{{ sale[3] }}</td>
+          <td>{{ "%.2f"|format(sale[2] * sale[3]) }}</td>
+          <td>{{ sale[4] }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <p>No sales recorded yet.</p>
+    {% endif %}
+  </section>
+</body>
+</html>

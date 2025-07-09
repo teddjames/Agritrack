@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Log In – AgriTrack</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>AgriTrack</h1>
+    <nav>
+      <a href="/login">Logn In</a> |
+      <a href="/signup">Sign Up</a>
+    </nav>
+  </header>
+
+  <section class="form-section">
+    <h2>Log In to Your Account</h2>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul style="color: red;">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <form method="POST">
+      <label>Username:</label>
+      <input type="text" name="username" required>
+
+      <label>Password:</label>
+      <input type="password" name="password" required>
+
+      <button type="submit">Log In</button>
+    </form>
+    <p>No account? <a href="/signup">Create one here</a></p>
+  </section>
+</body>
+</html>
